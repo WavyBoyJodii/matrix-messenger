@@ -24,6 +24,7 @@ import Container from "@/components/Container";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import setCookie from "@/lib/setCookie";
+import clearAuthCookie from "@/lib/clearAuthCookie";
 
 export default function LoginPage() {
   const form = useForm<ZLoginSchema>({
@@ -49,7 +50,7 @@ export default function LoginPage() {
         description: `${result.data.username} has succesfully logged in`,
       });
       setTimeout(() => {
-        router.push("/");
+        router.push("/home");
       }, 2000);
     } catch (error) {
       if (axios.isAxiosError<NegativeResponseType>(error)) {
@@ -68,6 +69,16 @@ export default function LoginPage() {
         }
       }
     }
+  };
+
+  const Logout = async () => {
+    clearAuthCookie();
+    toast({
+      description: `You have succesfully logged out`,
+    });
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
   };
 
   return (
@@ -112,6 +123,7 @@ export default function LoginPage() {
               <Button type="submit">Submit</Button>
             </form>
           </Form>
+          <Button onClick={Logout}>Log Out</Button>
         </div>
       </div>
     </Container>

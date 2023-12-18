@@ -20,7 +20,6 @@ import {
   NegativeResponseType,
 } from "@/lib/types";
 import Container from "@/components/Container";
-import { redirect } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 
@@ -68,9 +67,11 @@ export default function RegisterPage() {
   };
   return (
     <Container>
+      {" "}
       <div className=" h-screen flex justify-center items-center">
-        <div className=" w-1/3 h-1/2 p-10 flex flex-col gap-5 justify-center ">
-          <h1 className=" text-lg text-center">Create A new account</h1>
+        {" "}
+        <div className=" w-1/3 h-1/2 p-10 flex flex-col gap-5 justify-center">
+          <h1 className=" text-lg text-center">Create a new account</h1>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
               <FormField
@@ -157,7 +158,7 @@ export default function RegisterPage() {
                   <FormItem>
                     <FormLabel>Photo Url</FormLabel>
                     <FormControl>
-                      <Input {...field} />
+                      <Input {...field} required={false} />
                     </FormControl>
                     <FormDescription>
                       input a link to a photo of you.

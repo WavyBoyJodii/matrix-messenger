@@ -34,3 +34,9 @@ export interface AxiosErrorMessage {
 export interface NegativeResponseType {
   info: AxiosErrorMessage;
 }
+
+export interface PositiveLoginResponseType {
+  username: string;
+  userId: number;
+  token: string;
+}
