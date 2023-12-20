@@ -87,7 +87,7 @@ export default function RegisterPage() {
                     <FormItem>
                       <FormLabel>Username</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input autoComplete="off" {...field} />
                       </FormControl>
                       <FormDescription>
                         This is your public display name.
@@ -103,7 +103,7 @@ export default function RegisterPage() {
                     <FormItem>
                       <FormLabel>Password</FormLabel>
                       <FormControl>
-                        <Input required {...field} />
+                        <Input autoComplete="off" required {...field} />
                       </FormControl>
                       <FormDescription>Input Password</FormDescription>
                       <FormMessage />
@@ -120,6 +120,7 @@ export default function RegisterPage() {
                         <Input
                           type="email"
                           placeholder="Rockstar@GTA.com"
+                          autoComplete="off"
                           required
                           {...field}
                         />
@@ -138,7 +139,7 @@ export default function RegisterPage() {
                     <FormItem>
                       <FormLabel>First Name</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input autoComplete="off" {...field} />
                       </FormControl>
                       <FormDescription>Your First Name.</FormDescription>
                       <FormMessage />
@@ -152,7 +153,7 @@ export default function RegisterPage() {
                     <FormItem>
                       <FormLabel>Last Name</FormLabel>
                       <FormControl>
-                        <Input {...field} />
+                        <Input autoComplete="off" {...field} />
                       </FormControl>
                       <FormDescription>Your Last Name.</FormDescription>
                       <FormMessage />
@@ -170,6 +171,7 @@ export default function RegisterPage() {
                           {...field}
                           className=" hidden"
                           required={false}
+                          autoComplete="off"
                         />
                       </FormControl>
                       <FormDescription className="hidden">
