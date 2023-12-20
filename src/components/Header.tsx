@@ -11,7 +11,12 @@ export default function Header() {
             {/* need to add Link element when Router is setup*/}
             <Link href={"/"}>
               {" "}
-              <h1 className="text-xl font-bold">Matrix Messenger</h1>
+              <h1 className="text-2xl font-bold tracking-tight">
+                <span className=" text-transparent bg-indigo-500 bg-clip-text">
+                  Matrix
+                </span>{" "}
+                Messenger
+              </h1>
             </Link>
           </div>
           <nav className="mx-6 flex items-center justify-items-center space-x-4 lg:space-x-6 hidden md:block">
@@ -19,7 +24,7 @@ export default function Header() {
               <Button variant="ghost">Sign In</Button>
             </Link>
             <Link href="/register">
-              <Button variant="ghost">Sign Up</Button>
+              <Button variant="default">Sign Up</Button>
             </Link>
           </nav>
         </div>

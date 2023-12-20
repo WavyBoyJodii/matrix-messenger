@@ -67,7 +67,7 @@ export default function RegisterPage() {
     }
   };
   return (
-    <>
+    <div className="bg-gradient-to-bl from-fuchsia-200 via-white to-rose-200 min-h-screen">
       <Header />
       <Container>
         {" "}
@@ -185,6 +185,6 @@ export default function RegisterPage() {
           </div>
         </div>
       </Container>
-    </>
+    </div>
   );
 }

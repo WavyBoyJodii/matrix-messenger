@@ -83,11 +83,11 @@ export default function LoginPage() {
   };
 
   return (
-    <>
+    <div className="bg-gradient-to-bl from-fuchsia-200 via-white to-rose-200 min-h-screen">
       <Header />
       <Container>
         {" "}
-        <div className=" h-screen flex justify-center items-center">
+        <div className="flex justify-center items-center">
           {" "}
           <div className=" w-1/3 h-1/2 p-10 flex flex-col gap-5 justify-center ">
             <h1 className=" text-lg text-center">Login</h1>
@@ -133,6 +133,6 @@ export default function LoginPage() {
           </div>
         </div>
       </Container>
-    </>
+    </div>
   );
 }
