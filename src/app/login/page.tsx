@@ -24,7 +24,6 @@ import Container from "@/components/Container";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import setCookie from "@/lib/setCookie";
-import clearAuthCookie from "@/lib/clearAuthCookie";
 import Header from "@/components/Header";
 
 export default function LoginPage() {
@@ -70,16 +69,6 @@ export default function LoginPage() {
         }
       }
     }
-  };
-
-  const Logout = async () => {
-    clearAuthCookie();
-    toast({
-      description: `You have succesfully logged out`,
-    });
-    setTimeout(() => {
-      router.push("/");
-    }, 2000);
   };
 
   return (
@@ -129,7 +118,6 @@ export default function LoginPage() {
                 <Button type="submit">Submit</Button>
               </form>
             </Form>
-            <Button onClick={Logout}>Log Out</Button>
           </div>
         </div>
       </Container>
