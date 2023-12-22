@@ -25,6 +25,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import setCookie from "@/lib/setCookie";
 import Header from "@/components/Header";
+import getChats from "@/lib/getChats";
 
 export default function LoginPage() {
   const form = useForm<ZLoginSchema>({
@@ -45,12 +46,13 @@ export default function LoginPage() {
         data,
       );
       console.log(result);
-      setCookie(result.data.token);
+      await setCookie(result.data.token);
+      const chats = await getChats();
       toast({
         description: `${result.data.username} has succesfully logged in`,
       });
       setTimeout(() => {
-        router.push("/home");
+        router.push(`/chat/${chats[0].chatId}`);
       }, 2000);
     } catch (error) {
       if (axios.isAxiosError<NegativeResponseType>(error)) {
