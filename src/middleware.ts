@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import getAuth from "./lib/getAuth";
 
-const protectedRoutes = ["/home"];
+const protectedRoutes = ["/add-friend", "/chat", "/friend-list", "/requests"];
 
 export default async function middleware(req: NextRequest) {
   if (protectedRoutes.includes(req.nextUrl.pathname)) {
