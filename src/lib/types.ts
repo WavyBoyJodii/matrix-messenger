@@ -27,6 +27,15 @@ export const newUserSchema = z.object({
 
 export type ZNewUserSchema = z.infer<typeof newUserSchema>;
 
+export const requestedUserSchema = z.object({
+  requestedUser: z
+    .string()
+    .min(1, "Must Be atleast 1 character long")
+    .toLowerCase(),
+});
+
+export type ZRequestedUserSchema = z.infer<typeof requestedUserSchema>;
+
 export interface AxiosErrorMessage {
   message: string;
 }
