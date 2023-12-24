@@ -40,3 +40,33 @@ export interface PositiveLoginResponseType {
   userId: number;
   token: string;
 }
+
+export type User = {
+  id: number;
+  username: string;
+  password: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  profile_photo: string;
+};
+
+export type Message = {
+  id: number;
+  chat_id: number;
+  body: string;
+  timestamp: Date;
+  user_id: number;
+};
+
+export type Chat = {
+  chatId: string;
+  user_id1: number;
+  user_id2: number;
+  id: number;
+  created_at: Date;
+  message: Message[];
+  user1: User;
+  user2: User;
+  me: number;
+};
