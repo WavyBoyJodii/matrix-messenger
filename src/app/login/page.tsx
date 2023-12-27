@@ -26,6 +26,7 @@ import { useRouter } from "next/navigation";
 import setCookie from "@/lib/setCookie";
 import Header from "@/components/Header";
 import getChats from "@/lib/getChats";
+import setUserId from "@/lib/setUserId";
 
 export default function LoginPage() {
   const form = useForm<ZLoginSchema>({
@@ -45,14 +46,20 @@ export default function LoginPage() {
         "https://messengerbackend-production-d50f.up.railway.app/login",
         data,
       );
-      console.log(result);
-      await setCookie(result.data.token);
-      const chats = await getChats();
+      console.log(`logging result of login api call ${JSON.stringify(result)}`);
+      await setCookie({ jwt: result.data.token });
+      await setUserId(result.data.userId);
+      const chats = await getChats(result.data.userId);
       toast({
         description: `${result.data.username} has succesfully logged in`,
       });
+      console.log(chats);
       setTimeout(() => {
-        router.push(`/chat/${chats[0].chatId}`);
+        if (chats === false) {
+          router.push(`/chat/nochat`);
+        } else {
+          router.push(`/chat/${chats[0].chatId}`);
+        }
       }, 2000);
     } catch (error) {
       if (axios.isAxiosError<NegativeResponseType>(error)) {
