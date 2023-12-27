@@ -1,25 +1,58 @@
-"use server";
+"use client";
 
 import { Button } from "./ui/button";
 import axios from "axios";
-import { cookies } from "next/headers";
+import { useToast } from "@/components/ui/use-toast";
+import getMyId from "@/lib/getMyId";
+import {
+  AxiosErrorMessage,
+  PositiveAcceptRequestType,
+  User,
+} from "@/lib/types";
+import getAuthToken from "@/lib/getAuthToken";
 
-export default function AddFriendButton({ username }: { username: string }) {
-  const cookieStore = cookies();
-  const token = cookieStore.get("auth");
-  const onSubmit = async (username: string) => {
-    const result = await axios.post(
-      "https://messengerbackend-production-d50f.up.railway.app/users/find",
-      { requestedUser: username },
-      {
-        headers: {
-          Authorization: `Bearer ${token?.value}`,
+export default function AddFriendButton({ friend }: { friend: User }) {
+  const { toast } = useToast();
+  console.log(
+    `logging friend id in add friend button component ${JSON.stringify(
+      friend,
+    )}`,
+  );
+  const onSubmit = async () => {
+    const token = await getAuthToken();
+    const myId = await getMyId();
+
+    try {
+      const result = await axios.put<PositiveAcceptRequestType>(
+        "https://messengerbackend-production-d50f.up.railway.app/users/friend/",
+        { requestedUser: friend.id, userId: myId },
+        {
+          headers: {
+            Authorization: `Bearer ${token?.value}`,
+          },
         },
-      },
-    );
+      );
+      toast({
+        description: `${result.data.message}`,
+      });
+    } catch (error) {
+      if (axios.isAxiosError<AxiosErrorMessage>(error)) {
+        console.log(error);
+        const responseString = error.response?.data.message;
+        toast({
+          description: `${responseString}`,
+        });
+      } else {
+        console.log(error);
+      }
+    }
   };
   return (
-    <Button type="submit" onSubmit={() => onSubmit(username)}>
+    <Button
+      type="submit"
+      className=" flex gap-2 bg-green-500"
+      onClick={onSubmit}
+    >
       <svg
         width="15"
         height="15"
@@ -28,13 +61,13 @@ export default function AddFriendButton({ username }: { username: string }) {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M1.20308 1.04312C1.00481 0.954998 0.772341 1.0048 0.627577 1.16641C0.482813 1.32802 0.458794 1.56455 0.568117 1.75196L3.92115 7.50002L0.568117 13.2481C0.458794 13.4355 0.482813 13.672 0.627577 13.8336C0.772341 13.9952 1.00481 14.045 1.20308 13.9569L14.7031 7.95693C14.8836 7.87668 15 7.69762 15 7.50002C15 7.30243 14.8836 7.12337 14.7031 7.04312L1.20308 1.04312ZM4.84553 7.10002L2.21234 2.586L13.2689 7.50002L2.21234 12.414L4.84552 7.90002H9C9.22092 7.90002 9.4 7.72094 9.4 7.50002C9.4 7.27911 9.22092 7.10002 9 7.10002H4.84553Z"
+          d="M11.4669 3.72684C11.7558 3.91574 11.8369 4.30308 11.648 4.59198L7.39799 11.092C7.29783 11.2452 7.13556 11.3467 6.95402 11.3699C6.77247 11.3931 6.58989 11.3355 6.45446 11.2124L3.70446 8.71241C3.44905 8.48022 3.43023 8.08494 3.66242 7.82953C3.89461 7.57412 4.28989 7.55529 4.5453 7.78749L6.75292 9.79441L10.6018 3.90792C10.7907 3.61902 11.178 3.53795 11.4669 3.72684Z"
           fill="currentColor"
           fill-rule="evenodd"
           clip-rule="evenodd"
         ></path>
-      </svg>{" "}
-      Send Request
+      </svg>
+      Accept
     </Button>
   );
 }
