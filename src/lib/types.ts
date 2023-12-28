@@ -44,19 +44,32 @@ export interface NegativeResponseType {
   info: AxiosErrorMessage;
 }
 
+export interface NoUserChats {
+  message: string;
+}
+
 export interface PositiveLoginResponseType {
   username: string;
   userId: number;
   token: string;
 }
 
+export interface PositiveAcceptRequestType {
+  message: string;
+}
+
+export interface PositiveDeleteFriendResponseType {
+  message: string;
+}
+
+export interface PositiveChatResponseType {}
+
 export type User = {
   id: number;
   username: string;
-  password: string;
+
   email: string;
-  first_name: string;
-  last_name: string;
+
   profile_photo: string;
 };
 
@@ -77,5 +90,31 @@ export type Chat = {
   message: Message[];
   user1: User;
   user2: User;
-  me: number;
+};
+
+// export type ChatsReturn = {
+//   chats: Chat[];
+//   me: number;
+// };
+
+export type Friends = {
+  status: "pending" | "accepted" | "rejected";
+  user_id1: number;
+  user_id2: number;
+  friend: {
+    id: number;
+    username: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    profile_photo: string;
+  };
+  user: {
+    id: number;
+    username: string;
+    email: string;
+    first_name: string;
+    last_name: string;
+    profile_photo: string;
+  };
 };

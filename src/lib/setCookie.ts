@@ -2,6 +2,10 @@
 
 import { cookies } from "next/headers";
 
-export default async function setCookie(jwt: string) {
+interface setCookieProps {
+  jwt: string;
+}
+
+export default async function setCookie({ jwt }: setCookieProps) {
   cookies().set("auth", jwt);
 }

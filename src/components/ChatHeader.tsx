@@ -1,7 +1,8 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import getMyId from "@/lib/getMyId";
 import getUser from "@/lib/getUser";
 
-export default async function ChatHeader({ id }: { id: string }) {
+export default async function ChatHeader({ id }: { id: number }) {
   const user = await getUser(id);
 
   return (

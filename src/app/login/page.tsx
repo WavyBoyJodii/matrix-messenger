@@ -55,7 +55,7 @@ export default function LoginPage() {
       });
       console.log(chats);
       setTimeout(() => {
-        if (chats === false) {
+        if (chats.length === 0) {
           router.push(`/chat/nochat`);
         } else {
           router.push(`/chat/${chats[0].chatId}`);

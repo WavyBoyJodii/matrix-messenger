@@ -19,7 +19,7 @@ export default function Header() {
               </h1>
             </Link>
           </div>
-          <nav className="mx-6 flex items-center justify-items-center space-x-4 lg:space-x-6 hidden md:block">
+          <nav className="mx-6 flex items-center justify-items-center space-x-4 lg:space-x-6 md:block">
             <Link href="/login">
               <Button variant="ghost">Sign In</Button>
             </Link>

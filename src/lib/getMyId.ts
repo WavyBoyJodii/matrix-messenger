@@ -7,7 +7,6 @@ export default async function getMyId() {
   const cookieStore = cookies();
   const idString = cookieStore.get("user");
   const myId = Number(idString?.value);
-  console.log(`logging getMyId return: ${myId}`);
 
   return myId;
 }

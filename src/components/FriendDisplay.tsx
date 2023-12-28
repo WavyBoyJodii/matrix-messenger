@@ -25,9 +25,9 @@ export default function FriendDisplay({
         <AvatarFallback>{friend.username.substring(0, 1)}</AvatarFallback>
       </Avatar>
       <h3 className=" text-base font-semibold">{friend.username}</h3>
-      {friend && request ? (
+      {friend && add ? (
         <RequestFriendButton friend={friend} />
-      ) : add ? (
+      ) : request ? (
         <div className=" flex gap-3 items-center">
           <AddFriendButton friend={friend} />
           <RemoveFriendButton friend={friend} />
