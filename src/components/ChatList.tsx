@@ -10,15 +10,18 @@ export default async function ChatList() {
 
   return (
     <div className=" flex flex-col">
-      <h4 className=" text-sm">Chats</h4>
-      <ScrollArea className=" h-80 w-52 ">
+      <h4 className=" text-sm text-center">Chats</h4>
+      <ScrollArea className=" h-80 w-full ">
         <div className=" p-4">
           {chats &&
             chats.map((chat) => (
-              <>
-                <ChatPreview key={chat.chatId} chat={chat} />
+              <div key={chat.chatId}>
+                <ChatPreview
+                  chat={chat}
+                  messages={chat.message.length > 0 ? true : false}
+                />
                 <Separator className="my-2" />
-              </>
+              </div>
             ))}
         </div>
       </ScrollArea>

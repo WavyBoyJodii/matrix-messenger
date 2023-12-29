@@ -16,6 +16,7 @@ export default async function getChat(chatId: string) {
     },
   );
   const chat = (await result.json()) as Chat;
+  console.log(`logging chat in get chat ${chat}`);
 
   return chat;
 }

@@ -33,7 +33,6 @@ export default function RegisterPage() {
       email: "",
       firstName: "",
       lastName: "",
-      photo: "",
     },
   });
 
@@ -156,27 +155,6 @@ export default function RegisterPage() {
                         <Input autoComplete="off" {...field} />
                       </FormControl>
                       <FormDescription>Your Last Name.</FormDescription>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="photo"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className=" hidden">Photo Url</FormLabel>
-                      <FormControl>
-                        <Input
-                          {...field}
-                          className=" hidden"
-                          required={false}
-                          autoComplete="off"
-                        />
-                      </FormControl>
-                      <FormDescription className="hidden">
-                        input a link to a photo of you.
-                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}

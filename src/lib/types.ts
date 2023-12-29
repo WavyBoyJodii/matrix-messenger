@@ -22,7 +22,6 @@ export const newUserSchema = z.object({
     .email("this is not a valid email address"),
   firstName: z.string().min(1, "Must input a first name"),
   lastName: z.string().min(1, "Must input a last name"),
-  photo: z.string().url("must be a valid url").optional(),
 });
 
 export type ZNewUserSchema = z.infer<typeof newUserSchema>;

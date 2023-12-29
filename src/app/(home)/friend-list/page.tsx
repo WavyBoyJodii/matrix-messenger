@@ -11,7 +11,7 @@ export default async function FriendsListPage() {
       <div className=" flex justify-center p-10 h-24 ">
         <h1 className=" text-4xl font-semibold">Friends List</h1>
       </div>
-      <div className=" h-full w-full flex justify-center items-center">
+      <div className=" h-full w-full flex flex-col gap-2 justify-center items-center">
         {friends &&
           friends.map((friend) => {
             if (friend.user.id === myId) {

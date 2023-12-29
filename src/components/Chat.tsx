@@ -1,38 +1,55 @@
-import getChat from "@/lib/getChat";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+"use client";
 
-export default async function Chat({
-  chatId,
+import Message from "./Message";
+import MessageInput from "./MessageInput";
+import { Chat } from "@/lib/types";
+import { DateTime } from "luxon";
+import { useEffect, useRef } from "react";
+
+export default function Chat({
+  chat,
   friendId,
+  myId,
 }: {
-  chatId: string;
+  chat: Chat;
   friendId: string;
+  myId: number;
 }) {
-  const chat = await getChat(chatId);
-  const messages = chat.message.reverse();
+  const messages = chat.message;
+  console.log(`logging messages array ${JSON.stringify(messages)}`);
   const friendNumId = Number(friendId);
+  const lastMessageRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView();
+    }
+  }, [messages]);
 
   return (
-    <div className=" flex flex-col min-w-full min-h-full">
-      {messages.map((message) => (
-        <div className=" flex w-20" key={message.id}>
-          <Avatar className=" h-10 w-10">
-            <AvatarImage
-              src={
-                chat.user_id1 === friendNumId
-                  ? chat.user1.profile_photo
-                  : chat.user2.profile_photo
-              }
+    <div className=" h-4/5 overflow-y-auto">
+      <div className=" flex flex-col-reverse min-w-full min-h-full  gap-4 p-3 overflow-y-auto">
+        {messages.map((message, index) => {
+          const multiple =
+            messages[index - 1]?.user_id === messages[index].user_id;
+          const lastMessageDate = new Date(message.timestamp);
+          const lastMessageTime = DateTime.fromJSDate(
+            lastMessageDate,
+          ).toLocaleString(DateTime.TIME_SIMPLE);
+          return (
+            <Message
+              chat={chat}
+              friendId={friendNumId}
+              message={message}
+              multiple={multiple}
+              myId={myId}
+              key={message.id}
+              time={lastMessageTime}
             />
-            <AvatarFallback>
-              {chat.user_id1 === friendNumId
-                ? chat.user1.username.substring(0, 1)
-                : chat.user2.username.substring(0, 1)}
-            </AvatarFallback>
-          </Avatar>
-          <p>{message.body}</p>
-        </div>
-      ))}
+          );
+        })}
+      </div>
+      <div ref={lastMessageRef}></div>
     </div>
   );
 }
