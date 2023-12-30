@@ -28,13 +28,13 @@ export default async function Message({
         <Avatar className=" h-10 w-10">
           <AvatarImage
             src={
-              chat.user_id1 === friendId
+              chat.user_id1 === message.user_id
                 ? chat.user1.profile_photo
                 : chat.user2.profile_photo
             }
           />
           <AvatarFallback>
-            {chat.user_id1 === friendId
+            {chat.user_id1 === message.user_id
               ? chat.user1.username.substring(0, 1)
               : chat.user2.username.substring(0, 1)}
           </AvatarFallback>
