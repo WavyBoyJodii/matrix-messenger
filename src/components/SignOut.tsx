@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 export default function SignOut() {
   const router = useRouter();
   const { toast } = useToast();
-  const Logout = async () => {
+  const Logout = () => {
     router.push("/");
     setTimeout(() => {
       clearAuthCookie();

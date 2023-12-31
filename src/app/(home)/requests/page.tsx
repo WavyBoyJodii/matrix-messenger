@@ -1,4 +1,5 @@
 import FriendDisplay from "@/components/FriendDisplay";
+import Requests from "@/components/Requests";
 import getFriendRequests from "@/lib/getFriendRequests";
 import getMyId from "@/lib/getMyId";
 
@@ -11,28 +12,7 @@ export default async function RequestsPage() {
       <div className=" flex justify-center p-10 h-24 ">
         <h1 className=" text-4xl font-semibold">Friend Requests</h1>
       </div>
-      <div className=" h-full w-full flex justify-center items-center">
-        {requests &&
-          requests.map((request) => {
-            if (request.user.id === myId) {
-              return (
-                <FriendDisplay
-                  friend={request.friend}
-                  key={request.friend.id}
-                  request={true}
-                />
-              );
-            } else {
-              return (
-                <FriendDisplay
-                  friend={request.user}
-                  key={request.user.id}
-                  request={true}
-                />
-              );
-            }
-          })}
-      </div>
+      <Requests initialRequests={requests} myId={myId} />
     </div>
   );
 }

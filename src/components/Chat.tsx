@@ -1,21 +1,23 @@
 "use client";
 
-import Message from "./Message";
-import MessageInput from "./MessageInput";
-import { Chat } from "@/lib/types";
+import { pusher } from "@/lib/pusher";
+import Messages from "./Messages";
+import { Chat, Message, PusherMessage } from "@/lib/types";
 import { DateTime } from "luxon";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Chat({
   chat,
   friendId,
   myId,
+  initialMessages,
 }: {
   chat: Chat;
   friendId: string;
   myId: number;
+  initialMessages: Message[];
 }) {
-  const messages = chat.message;
+  const [messages, setMessages] = useState(initialMessages);
   console.log(`logging messages array ${JSON.stringify(messages)}`);
   const friendNumId = Number(friendId);
   const lastMessageRef = useRef<HTMLDivElement>(null);
@@ -25,6 +27,22 @@ export default function Chat({
       lastMessageRef.current.scrollIntoView();
     }
   }, [messages]);
+
+  useEffect(() => {
+    pusher.subscribe(`messages-${chat.id}`);
+
+    function addToMessages(message: PusherMessage) {
+      console.log(`logging message from pusher ${JSON.stringify(message)}`);
+      setMessages((prev) => [message.message, ...prev]);
+    }
+
+    pusher.bind("new-message", addToMessages);
+
+    return () => {
+      pusher.unsubscribe(`messages-${chat.id}`);
+      pusher.unbind("new-message", addToMessages);
+    };
+  }, []);
 
   return (
     <div className=" h-4/5 overflow-y-auto">
@@ -37,13 +55,13 @@ export default function Chat({
             lastMessageDate,
           ).toLocaleString(DateTime.TIME_SIMPLE);
           return (
-            <Message
+            <Messages
               chat={chat}
               friendId={friendNumId}
               message={message}
               multiple={multiple}
               myId={myId}
-              key={message.id}
+              key={`${message.id}+${message.timestamp}`}
               time={lastMessageTime}
             />
           );

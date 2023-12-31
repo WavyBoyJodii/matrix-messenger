@@ -4,12 +4,14 @@ import type { Chat } from "@/lib/types";
 import { DateTime } from "luxon";
 import Link from "next/link";
 
-export default async function ChatPreview({
+export default function ChatPreview({
   chat,
   messages,
+  myId,
 }: {
   chat: Chat;
   messages: boolean;
+  myId: number;
 }) {
   let lastMessageDate;
   let lastMessageTime;
@@ -20,8 +22,6 @@ export default async function ChatPreview({
       DateTime.TIME_SIMPLE,
     );
   }
-
-  const myId = await getMyId();
 
   return (
     <Link href={`/chat/${chat.chatId}`}>

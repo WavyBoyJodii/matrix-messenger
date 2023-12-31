@@ -7,14 +7,19 @@ import { Button } from "./ui/button";
 import UserInfo from "./UserInfo";
 import getMyId from "@/lib/getMyId";
 import getUser from "@/lib/getUser";
+import getChats from "@/lib/getChats";
 
 export default async function Sidebar({ className }: { className: string }) {
   // const myId = await getMyId();
   // const user = await getUser(myId);
+  const myId = await getMyId();
+
+  const chats = await getChats(myId);
+
   // console.log(`logging me as user in sidebar component ${user}`);
 
   return (
-    <div className={`${className} flex-col gap-4`}>
+    <div className={`${className} flex-col gap-4 overflow-y-auto`}>
       <div className=" flex justify-center items-center mt-2">
         <h1 className="text-2xl font-bold tracking-tight">
           <span className=" text-transparent bg-indigo-500 bg-clip-text">
@@ -24,7 +29,7 @@ export default async function Sidebar({ className }: { className: string }) {
         </h1>
       </div>
       <NewChatButton />
-      <ChatList />
+      <ChatList initialChats={chats} myId={myId} />
       <Separator className=" my-4 w-full" />
       <div className="flex flex-col gap-2">
         <Link href={"/add-friend"}>

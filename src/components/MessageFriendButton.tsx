@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import axios from "axios";
 import { useToast } from "@/components/ui/use-toast";
 import getMyId from "@/lib/getMyId";
-import { AxiosErrorMessage, Chat, User } from "@/lib/types";
+import { AxiosErrorMessage, Chat, NewChatReturn, User } from "@/lib/types";
 import getAuthToken from "@/lib/getAuthToken";
 import { useRouter } from "next/navigation";
 
@@ -17,7 +17,7 @@ export default function MessageFriendButton({ friend }: { friend: User }) {
     const myId = await getMyId();
 
     try {
-      const result = await axios.post<Chat>(
+      const result = await axios.post<NewChatReturn>(
         "https://messengerbackend-production-d50f.up.railway.app/users/chat",
         { friendId: friend.id, userId: myId },
         {
@@ -26,7 +26,13 @@ export default function MessageFriendButton({ friend }: { friend: User }) {
           },
         },
       );
-      router.push(`/chat/${result.data.chatId}`);
+      console.log(
+        `logging result of message friend button ${JSON.stringify(
+          result.data,
+        )}`,
+      );
+
+      router.push(`/chat/${result.data.chat.chatId}`);
     } catch (error) {
       if (axios.isAxiosError<AxiosErrorMessage>(error)) {
         console.log(error);

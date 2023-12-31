@@ -80,6 +80,10 @@ export type Message = {
   user_id: number;
 };
 
+export type PusherMessage = {
+  message: Message;
+};
+
 export type Chat = {
   chatId: string;
   user_id1: number;
@@ -91,6 +95,9 @@ export type Chat = {
   user2: User;
 };
 
+export type NewChatReturn = {
+  chat: Chat;
+};
 // export type ChatsReturn = {
 //   chats: Chat[];
 //   me: number;

@@ -29,16 +29,19 @@ export default async function ChatPage({
             : Number(chatParticipants[0])
         }
       />
-      <Chat
-        chat={chat}
-        friendId={
-          chatParticipants[0] === myId.toString()
-            ? chatParticipants[1]
-            : chatParticipants[0]
-        }
-        myId={myId}
-      />
-      <MessageInput chatId={chat.id} />
+      {chat && (
+        <Chat
+          chat={chat}
+          friendId={
+            chatParticipants[0] === myId.toString()
+              ? chatParticipants[1]
+              : chatParticipants[0]
+          }
+          myId={myId}
+          initialMessages={chat.message}
+        />
+      )}
+      {chat && <MessageInput chatId={chat.id} />}
     </>
   );
 }

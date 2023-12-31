@@ -10,9 +10,11 @@ import {
   User,
 } from "@/lib/types";
 import getAuthToken from "@/lib/getAuthToken";
+import { useRouter } from "next/navigation";
 
 export default function AddFriendButton({ friend }: { friend: User }) {
   const { toast } = useToast();
+  const router = useRouter();
   //   console.log(
   //     `logging friend id in add friend button component ${JSON.stringify(
   //       friend,
@@ -35,6 +37,9 @@ export default function AddFriendButton({ friend }: { friend: User }) {
       toast({
         description: `${result.data.message}`,
       });
+      setTimeout(() => {
+        router.refresh();
+      }, 2000);
     } catch (error) {
       if (axios.isAxiosError<AxiosErrorMessage>(error)) {
         console.log(error);
