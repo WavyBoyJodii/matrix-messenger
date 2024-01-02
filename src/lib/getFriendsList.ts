@@ -18,12 +18,6 @@ export default async function getFriendsList() {
     },
   );
 
-  console.log(
-    `logging result.json to see what it holds in get friend requests ${JSON.stringify(
-      result.data,
-    )}`,
-  );
-
   if (result.status === 404) {
     return null;
   } else {

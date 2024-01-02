@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import ChatPreview from "./ChatPreview";
 import getChats from "@/lib/getChats";
 import getMyId from "@/lib/getMyId";
-import { Chat } from "@/lib/types";
+import { Chat, PusherChats } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { pusher } from "@/lib/pusher";
 
@@ -21,15 +21,22 @@ export default function ChatList({
   useEffect(() => {
     pusher.subscribe(`chats-${myId}`);
 
-    function addToChats(chats: Chat[]) {
-      console.log(`logging message from pusher ${JSON.stringify(chats)}`);
-      setChats(chats);
+    chats.forEach((chat) => {
+      pusher.subscribe(`messages-${chat.id}-${myId}`);
+    });
+
+    function addToChats(chats: PusherChats) {
+      console.log(`logging chats from pusher ${JSON.stringify(chats)}`);
+      setChats(chats.chats);
     }
 
     pusher.bind("mychats", addToChats);
 
     return () => {
       pusher.unsubscribe(`chats-${myId}`);
+      chats.forEach((chat) => {
+        pusher.unsubscribe(`messages-${chat.id}-${myId}`);
+      });
       pusher.unbind("mychats", addToChats);
     };
   }, []);

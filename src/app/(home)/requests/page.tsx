@@ -12,7 +12,7 @@ export default async function RequestsPage() {
       <div className=" flex justify-center p-10 h-24 ">
         <h1 className=" text-4xl font-semibold">Friend Requests</h1>
       </div>
-      <Requests initialRequests={requests} myId={myId} />
+      <Requests requests={requests} myId={myId} />
     </div>
   );
 }

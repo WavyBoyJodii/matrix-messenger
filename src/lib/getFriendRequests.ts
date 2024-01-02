@@ -18,11 +18,11 @@ export default async function getFriendRequests() {
     },
   );
 
-  console.log(
-    `logging result.json to see what it holds in get friend requests ${JSON.stringify(
-      result.data,
-    )}`,
-  );
+  // console.log(
+  //   `logging result.json to see what it holds in get friend requests ${JSON.stringify(
+  //     result.data,
+  //   )}`,
+  // );
 
   const requests = (await JSON.parse(result.data)) as Friends[];
   return requests;

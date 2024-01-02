@@ -98,10 +98,9 @@ export type Chat = {
 export type NewChatReturn = {
   chat: Chat;
 };
-// export type ChatsReturn = {
-//   chats: Chat[];
-//   me: number;
-// };
+export type PusherChats = {
+  chats: Chat[];
+};
 
 export type Friends = {
   status: "pending" | "accepted" | "rejected";
