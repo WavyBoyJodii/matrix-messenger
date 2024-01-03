@@ -18,7 +18,7 @@ export default function Chat({
   initialMessages: Message[];
 }) {
   const [messages, setMessages] = useState(initialMessages);
-  console.log(`logging messages array ${JSON.stringify(messages)}`);
+  // console.log(`logging messages array ${JSON.stringify(messages)}`);
   const friendNumId = Number(friendId);
   const lastMessageRef = useRef<HTMLDivElement>(null);
 
@@ -32,8 +32,11 @@ export default function Chat({
     pusher.subscribe(`messages-${chat.id}`);
 
     function addToMessages(message: PusherMessage) {
-      console.log(`logging message from pusher ${JSON.stringify(message)}`);
-      setMessages((prev) => [message.message, ...prev]);
+      const messageObj = JSON.parse(message.message) as Message;
+      console.log(
+        `logging messageOBJ from pusher ${JSON.stringify(messageObj)}`,
+      );
+      setMessages((prev) => [messageObj, ...prev]);
     }
 
     pusher.bind("new-message", addToMessages);
