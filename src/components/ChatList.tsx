@@ -17,7 +17,24 @@ export default function ChatList({
   myId: number;
 }) {
   const [chats, setChats] = useState(initialChats);
+  if (chats.length > 1) {
+    chats.sort((chatA, chatB) => {
+      // console.log(`logging chat a in chatlist ${JSON.stringify(chatA)}`);
+      if (!chatA.message[0]) {
+        return 0;
+      }
+      if (!chatB.message[0]) {
+        return 0;
+      }
+      const latestMessageA = chatA.message[0];
+      const latestMessageB = chatB.message[0];
 
+      return (
+        new Date(latestMessageB.timestamp).getTime() -
+        new Date(latestMessageA.timestamp).getTime()
+      );
+    });
+  }
   useEffect(() => {
     pusher.subscribe(`chats-${myId}`);
 
@@ -25,9 +42,21 @@ export default function ChatList({
       pusher.subscribe(`messages-${chat.id}-${myId}`);
     });
 
-    function addToChats(chats: PusherChats) {
-      console.log(`logging chats from pusher ${JSON.stringify(chats)}`);
-      setChats(chats.chats);
+    function addToChats(newchat: PusherChats) {
+      // console.log(`logging newChat from pusher ${JSON.stringify(newchat)}`);
+      const chatObj = JSON.parse(newchat.chat) as Chat;
+      console.log(`logging chatObj ${JSON.stringify(chatObj)}`);
+
+      const chatIndex = chats.findIndex((chat) => chat.id === chatObj.id);
+      if (chatIndex !== -1) {
+        setChats((prevChats) => [
+          ...prevChats.slice(0, chatIndex),
+          chatObj,
+          ...prevChats.slice(chatIndex + 1),
+        ]);
+      } else {
+        setChats((prevChats) => [...prevChats, chatObj]);
+      }
     }
 
     pusher.bind("mychats", addToChats);
@@ -39,7 +68,7 @@ export default function ChatList({
       });
       pusher.unbind("mychats", addToChats);
     };
-  }, []);
+  }, [chats, myId]);
 
   return (
     <div className=" flex flex-col">
