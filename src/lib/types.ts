@@ -81,7 +81,7 @@ export type Message = {
 };
 
 export type PusherMessage = {
-  message: Message;
+  message: string;
 };
 
 export type Chat = {
@@ -99,7 +99,7 @@ export type NewChatReturn = {
   chat: Chat;
 };
 export type PusherChats = {
-  chats: Chat[];
+  chat: string;
 };
 
 export type Friends = {

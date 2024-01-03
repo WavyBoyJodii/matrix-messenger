@@ -9,12 +9,13 @@ export default async function getFriendRequests() {
   const myId = await getMyId();
   const token = await getAuthToken();
 
-  const result = await axios.get(
+  const result = await fetch(
     `https://messengerbackend-production-d50f.up.railway.app/users/friend/${myId}`,
     {
       headers: {
         Authorization: `Bearer ${token?.value}`,
       },
+      cache: "no-store",
     },
   );
 
@@ -24,6 +25,6 @@ export default async function getFriendRequests() {
   //   )}`,
   // );
 
-  const requests = (await JSON.parse(result.data)) as Friends[];
+  const requests = JSON.parse(await result.json()) as Friends[];
   return requests;
 }

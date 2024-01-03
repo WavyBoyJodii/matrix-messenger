@@ -8,7 +8,7 @@ export default async function getChats(userId: number) {
   const cookieStore = cookies();
   const token = cookieStore.get("auth");
 
-  const result = await fetch(
+  const result = await axios.get(
     `https://messengerbackend-production-d50f.up.railway.app/users/chats/${userId}`,
     {
       headers: {
@@ -17,7 +17,7 @@ export default async function getChats(userId: number) {
     },
   );
   console.log(`logging result of getchats: ${result.status}`);
-  const chats = (await result.json()) as Chat[];
+  const chats = (await result.data) as Chat[];
 
   return chats;
 }
