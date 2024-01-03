@@ -10,7 +10,7 @@ export default async function RequestsPage() {
   return (
     <div className="min-w-full min-h-full flex flex-col">
       <div className=" flex justify-center p-10 h-24 ">
-        <h1 className=" text-4xl font-semibold">Friend Requests</h1>
+        <h1 className=" text-2xl sm:text-4xl font-semibold">Friend Requests</h1>
       </div>
       <Requests requests={requests} myId={myId} />
     </div>

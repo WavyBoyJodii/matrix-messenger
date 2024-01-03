@@ -61,7 +61,7 @@ export default function MessageFriendButton({ friend }: { friend: User }) {
           clipRule="evenodd"
         ></path>
       </svg>{" "}
-      Send Message
+      <p className=" hidden sm:block">Message</p>
     </Button>
   );
 }

@@ -40,7 +40,7 @@ export default function ChatPreview({
               : chat.user1.username.substring(0, 1)}
           </AvatarFallback>
         </Avatar>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-1 hidden sm:block">
           <h3 className=" text-base font-semibold">
             {myId === chat.user_id1 ? chat.user2.username : chat.user1.username}
           </h3>
@@ -48,7 +48,7 @@ export default function ChatPreview({
             {messages === true ? chat.message[0].body : null}
           </p>
         </div>
-        <p className=" text-xs">{lastMessageTime}</p>
+        <p className=" text-xs hidden sm:block">{lastMessageTime}</p>
       </div>
     </Link>
   );

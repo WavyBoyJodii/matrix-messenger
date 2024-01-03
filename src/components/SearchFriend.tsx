@@ -74,7 +74,11 @@ export default function SearchFriend({ setFriend }: SearchFriendProps) {
             render={({ field }) => (
               <FormItem className="">
                 <FormControl>
-                  <Input autoComplete="off" {...field} />
+                  <Input
+                    className=" w-32 sm:w-auto"
+                    autoComplete="off"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage className=" flex place-content-center" />
               </FormItem>

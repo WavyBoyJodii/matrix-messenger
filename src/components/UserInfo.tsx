@@ -30,7 +30,7 @@ export default function UserInfo({ className }: { className: string }) {
               {`${me.username.substring(0, 1)}`}
             </AvatarFallback>
           </Avatar>
-          <div className="flex flex-col gap-1">
+          <div className="hidden sm:block flex flex-col gap-1">
             <h3 className=" text-base font-semibold text-black">
               {`${me.username}`}
             </h3>

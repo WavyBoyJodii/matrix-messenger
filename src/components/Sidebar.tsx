@@ -21,7 +21,7 @@ export default async function Sidebar({ className }: { className: string }) {
   return (
     <div className={`${className} flex-col gap-4 overflow-y-auto`}>
       <div className=" flex justify-center items-center mt-2">
-        <h1 className="text-2xl font-bold tracking-tight">
+        <h1 className=" text-lg sm:text-2xl text-center font-bold tracking-tight">
           <span className=" text-transparent bg-indigo-500 bg-clip-text">
             Matrix
           </span>{" "}
@@ -48,7 +48,7 @@ export default async function Sidebar({ className }: { className: string }) {
                 clipRule="evenodd"
               ></path>
             </svg>
-            Add Friend
+            <p className=" hidden sm:block">Add Friend</p>
           </Button>
         </Link>
         <Link href={"/friend-list"}>
@@ -67,7 +67,7 @@ export default async function Sidebar({ className }: { className: string }) {
                 clipRule="evenodd"
               ></path>
             </svg>{" "}
-            Friends List
+            <p className=" hidden sm:block">Friends List</p>
           </Button>
         </Link>
         <Link href={"/requests"}>
@@ -87,7 +87,7 @@ export default async function Sidebar({ className }: { className: string }) {
                 clipRule="evenodd"
               ></path>
             </svg>
-            View Friend Requests
+            <p className=" hidden sm:block">View Friend Requests</p>
           </Button>
         </Link>
         <SignOut />

@@ -11,7 +11,7 @@ export default function AddFriendPage() {
   return (
     <div className="min-w-full min-h-full flex flex-col">
       <div className=" flex justify-center p-10 h-24 ">
-        <h1 className=" text-4xl font-semibold">Add A Friend</h1>
+        <h1 className=" text-2xl sm:text-4xl font-semibold">Add A Friend</h1>
       </div>
       <SearchFriend setFriend={setFriend} />
       <div className=" h-full w-full flex justify-center items-center">
