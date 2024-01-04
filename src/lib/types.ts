@@ -80,6 +80,16 @@ export type Message = {
   user_id: number;
 };
 
+export enum Roles {
+  user = "user",
+  assistant = "assistant",
+}
+
+export type AiMessage = {
+  role: Roles;
+  content: string;
+};
+
 export type PusherMessage = {
   message: string;
 };
