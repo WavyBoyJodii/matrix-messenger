@@ -8,6 +8,7 @@ import { Button } from "./ui/button";
 import getAuthToken from "@/lib/getAuthToken";
 import { NegativeResponseType } from "@/lib/types";
 import getMyId from "@/lib/getMyId";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 interface ChatInputProps {
   chatId: number;
@@ -16,10 +17,12 @@ interface ChatInputProps {
 export default function MessageInput({ chatId }: ChatInputProps) {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const [input, setInput] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const sendMessage = async () => {
     if (!input) return;
+    setIsLoading(true);
 
     try {
       const token = await getAuthToken();
@@ -35,6 +38,7 @@ export default function MessageInput({ chatId }: ChatInputProps) {
       );
       setInput("");
       textareaRef.current?.focus();
+      setIsLoading(false);
     } catch (error) {
       if (axios.isAxiosError<NegativeResponseType>(error)) {
         console.log(error);
@@ -43,6 +47,7 @@ export default function MessageInput({ chatId }: ChatInputProps) {
           description: `${responseString}`,
         });
       }
+      setIsLoading(false);
     }
   };
 
@@ -71,9 +76,16 @@ export default function MessageInput({ chatId }: ChatInputProps) {
         ></div> */}
       </div>
 
-      <Button onClick={sendMessage} type="submit">
-        Post
-      </Button>
+      {isLoading ? (
+        <Button disabled>
+          <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+          Please wait
+        </Button>
+      ) : (
+        <Button onClick={sendMessage} type="submit">
+          Post
+        </Button>
+      )}
     </div>
   );
 }
