@@ -3,16 +3,17 @@
 import { AiMessage, NegativeResponseType, Roles, User } from "@/lib/types";
 import { useEffect, useRef, useState } from "react";
 import AiMessages from "./AiMessages";
-import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import TextareaAutosize from "react-textarea-autosize";
 import { Button } from "./ui/button";
 import getAuthToken from "@/lib/getAuthToken";
 import { useToast } from "@/components/ui/use-toast";
+import { ReloadIcon } from "@radix-ui/react-icons";
 
 export default function AiChat({ user }: { user: User }) {
   const [aiMessages, setAiMessages] = useState<AiMessage[] | null>(null);
   const [input, setInput] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const lastMessageRef = useRef<HTMLDivElement>(null);
@@ -26,28 +27,44 @@ export default function AiChat({ user }: { user: User }) {
 
   const sendMessage = async () => {
     if (!input) return;
+    setIsLoading(true);
 
     try {
       const token = await getAuthToken();
 
-      const result = await axios.post<AiMessage>(
-        "https://messengerbackend-production-d50f.up.railway.app/users/ai",
-        { message: input },
-        {
-          headers: {
-            Authorization: `Bearer ${token?.value}`,
-          },
-        },
-      );
-
       if (aiMessages === null) {
+        const result = await axios.post<AiMessage>(
+          "https://messengerbackend-production-d50f.up.railway.app/users/ai",
+          { message: JSON.stringify([{ role: Roles.user, content: input }]) },
+          {
+            headers: {
+              Authorization: `Bearer ${token?.value}`,
+            },
+          },
+        );
         setAiMessages([{ role: Roles.user, content: input }, result.data]);
+        setIsLoading(false);
       } else {
+        const result = await axios.post<AiMessage>(
+          "https://messengerbackend-production-d50f.up.railway.app/users/ai",
+          {
+            message: JSON.stringify([
+              ...aiMessages,
+              { role: Roles.user, content: input },
+            ]),
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token?.value}`,
+            },
+          },
+        );
         setAiMessages([
           ...aiMessages,
           { role: Roles.user, content: input },
           result.data,
         ]);
+        setIsLoading(false);
       }
       setInput("");
 
@@ -60,6 +77,7 @@ export default function AiChat({ user }: { user: User }) {
           description: `${responseString}`,
         });
       }
+      setIsLoading(false);
     }
   };
 
@@ -101,9 +119,16 @@ export default function AiChat({ user }: { user: User }) {
           />
         </div>
 
-        <Button onClick={sendMessage} type="submit">
-          Post
-        </Button>
+        {isLoading ? (
+          <Button disabled>
+            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+            Please wait
+          </Button>
+        ) : (
+          <Button onClick={sendMessage} type="submit">
+            Post
+          </Button>
+        )}
       </div>
     </>
   );
