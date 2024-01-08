@@ -6,7 +6,11 @@ export const metadata: Metadata = {
   description: "Chat with friends, Chat with AI",
 };
 
-export default function AiLayout({ children }: { children: React.ReactNode }) {
+export default function HomeLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <div className=" flex flex-col h-screen">
       <div className="flex flex-1 overflow-hidden">

@@ -3,7 +3,13 @@ import type { NextRequest } from "next/server";
 import getAuth from "./lib/getAuth";
 
 export const config = {
-  matcher: ["/add-friend", "/chat/:path*", "/friend-list", "/requests"],
+  matcher: [
+    "/add-friend",
+    "/chat/:path*",
+    "/friend-list",
+    "/requests",
+    "/ai/:path*",
+  ],
 };
 
 // const protectedRoutes = [
