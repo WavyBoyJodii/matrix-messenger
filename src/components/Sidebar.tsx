@@ -11,6 +11,7 @@ import getChats from "@/lib/getChats";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import getAiChats from "@/lib/getAiChats";
 import AiChatList from "./AiChatList";
+import clearAuthCookie from "@/lib/clearAuthCookie";
 
 export default async function Sidebar({ className }: { className: string }) {
   // const myId = await getMyId();
@@ -106,7 +107,7 @@ export default async function Sidebar({ className }: { className: string }) {
             <p className=" hidden sm:block">View Friend Requests</p>
           </Button>
         </Link>
-        <SignOut />
+        <SignOut clearAuthCookie={clearAuthCookie} />
       </div>
 
       <UserInfo className=" mt-auto" />

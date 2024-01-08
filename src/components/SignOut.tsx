@@ -5,7 +5,11 @@ import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
-export default function SignOut() {
+export default function SignOut({
+  clearAuthCookie,
+}: {
+  clearAuthCookie: () => Promise<void>;
+}) {
   const router = useRouter();
   const { toast } = useToast();
   const Logout = () => {
