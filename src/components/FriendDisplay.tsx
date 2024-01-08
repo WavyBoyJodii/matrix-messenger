@@ -19,7 +19,7 @@ export default function FriendDisplay({
   list,
 }: FriendDisplayProps) {
   return (
-    <div className=" h-12 grid grid-cols-3 items-center place-self-center gap-1 p-1  md:p-3 w-auto">
+    <div className=" h-fit gap-4 grid grid-cols-3 items-center place-self-center md:gap-2 p-1  md:p-3 w-auto">
       <Avatar className=" h-10 w-10 place-self-center">
         <AvatarImage src={friend.profile_photo} />
         <AvatarFallback>{friend.username.substring(0, 1)}</AvatarFallback>

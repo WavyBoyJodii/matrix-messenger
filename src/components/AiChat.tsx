@@ -71,7 +71,6 @@ export default function AiChat({
               { role: Roles.user, content: input },
             ]),
             aichatid: chatId,
-            myId: myId,
           },
           {
             headers: {

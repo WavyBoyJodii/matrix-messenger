@@ -70,6 +70,16 @@ export default function ChatList({
     };
   }, [chats, myId]);
 
+  useEffect(() => {
+    async function importChats() {
+      const trueChats = await getChats(myId);
+      if (trueChats) {
+        setChats(trueChats);
+      } else return;
+    }
+    importChats();
+  }, [myId]);
+
   return (
     <div className=" flex flex-col">
       <h4 className=" text-sm text-center">Chats</h4>
@@ -83,6 +93,7 @@ export default function ChatList({
                   messages={chat.message.length > 0 ? true : false}
                   myId={myId}
                 />
+
                 <Separator className="my-2" />
               </div>
             ))}

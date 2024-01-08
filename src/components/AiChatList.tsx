@@ -6,6 +6,8 @@ import { AiChat, PusherChats } from "@/lib/types";
 import { useEffect, useState } from "react";
 import { pusher } from "@/lib/pusher";
 import AiChatPreview from "./AiChatPreview";
+import { SetStateAction, Dispatch } from "react";
+import getAiChats from "@/lib/getAiChats";
 
 export default function AiChatList({
   initialChats,
@@ -36,6 +38,16 @@ export default function AiChatList({
       pusher.unbind("aichats", addToChats);
     };
   }, [aiChats, myId]);
+
+  useEffect(() => {
+    async function importAiChats() {
+      const trueAiChats = await getAiChats();
+      if (trueAiChats) {
+        setAiChats(trueAiChats);
+      } else return;
+    }
+    importAiChats();
+  }, []);
 
   return (
     <div className=" flex flex-col">

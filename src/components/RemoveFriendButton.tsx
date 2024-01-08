@@ -72,7 +72,7 @@ export default function RemoveFriendButton({ friend }: { friend: User }) {
           clipRule="evenodd"
         ></path>
       </svg>
-      <p className=" hidden sm:block">Remove</p>
+      <p className=" hidden lg:block">Remove</p>
     </Button>
   );
 }
