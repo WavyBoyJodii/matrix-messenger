@@ -5,10 +5,10 @@ import getAuth from "./lib/getAuth";
 export const config = {
   matcher: [
     "/add-friend",
-    "/chat/(.*)",
+    "/chat/:path*",
     "/friend-list",
     "/requests",
-    "/ai/(.*)*",
+    "/ai/:path*",
   ],
 };
 
