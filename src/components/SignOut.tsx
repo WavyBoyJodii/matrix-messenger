@@ -10,8 +10,8 @@ export default function SignOut() {
   const { toast } = useToast();
   const Logout = () => {
     router.push("/");
-    setTimeout(() => {
-      clearAuthCookie();
+    setTimeout(async () => {
+      await clearAuthCookie();
     }, 2000);
 
     toast({
