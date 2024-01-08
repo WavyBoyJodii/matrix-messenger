@@ -87,7 +87,7 @@ export default function LoginPage() {
         {" "}
         <div className="flex justify-center items-center">
           {" "}
-          <div className=" w-1/3 h-1/2 p-10 flex flex-col gap-5 justify-center ">
+          <div className=" w-full p-2  sm:w-1/2  h-1/2 md:p-10 flex flex-col gap-5 justify-center ">
             <h1 className=" text-lg text-center">Login</h1>
             <Form {...form}>
               <form
