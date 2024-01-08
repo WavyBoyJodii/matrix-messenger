@@ -1,5 +1,4 @@
 "use server";
-export const revalidate = 0;
 
 import { cookies } from "next/headers";
 import type { User } from "@/lib/types";
