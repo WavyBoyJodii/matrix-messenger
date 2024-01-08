@@ -10,10 +10,21 @@ import getAuthToken from "@/lib/getAuthToken";
 import { useToast } from "@/components/ui/use-toast";
 import { ReloadIcon } from "@radix-ui/react-icons";
 
-export default function AiChat({ user }: { user: User }) {
-  const [aiMessages, setAiMessages] = useState<AiMessage[] | null>(null);
+export default function AiChat({
+  user,
+  aiChatId,
+  initialMessages,
+  myId,
+}: {
+  user: User;
+  aiChatId: number;
+  initialMessages: AiMessage[];
+  myId: number;
+}) {
+  const [aiMessages, setAiMessages] = useState<AiMessage[]>(initialMessages);
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const [chatId, setChatId] = useState(aiChatId);
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const lastMessageRef = useRef<HTMLDivElement>(null);
@@ -28,14 +39,20 @@ export default function AiChat({ user }: { user: User }) {
   const sendMessage = async () => {
     if (!input) return;
     setIsLoading(true);
+    console.log(`logging chatId in Ai Chat component ${chatId}`);
 
     try {
       const token = await getAuthToken();
+      console.log(`logging ai messages length ${aiMessages.length}`);
 
-      if (aiMessages === null) {
+      if (aiMessages.length < 1) {
         const result = await axios.post<AiMessage>(
           "https://messengerbackend-production-d50f.up.railway.app/users/ai",
-          { message: JSON.stringify([{ role: Roles.user, content: input }]) },
+          {
+            message: JSON.stringify([{ role: Roles.user, content: input }]),
+            aichatid: chatId,
+            myId: myId,
+          },
           {
             headers: {
               Authorization: `Bearer ${token?.value}`,
@@ -44,6 +61,7 @@ export default function AiChat({ user }: { user: User }) {
         );
         setAiMessages([{ role: Roles.user, content: input }, result.data]);
         setIsLoading(false);
+        setChatId(chatId);
       } else {
         const result = await axios.post<AiMessage>(
           "https://messengerbackend-production-d50f.up.railway.app/users/ai",
@@ -52,6 +70,8 @@ export default function AiChat({ user }: { user: User }) {
               ...aiMessages,
               { role: Roles.user, content: input },
             ]),
+            aichatid: chatId,
+            myId: myId,
           },
           {
             headers: {
@@ -65,6 +85,7 @@ export default function AiChat({ user }: { user: User }) {
           result.data,
         ]);
         setIsLoading(false);
+        setChatId(chatId);
       }
       setInput("");
 
@@ -78,6 +99,9 @@ export default function AiChat({ user }: { user: User }) {
         });
       }
       setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+      setChatId(chatId);
     }
   };
 
@@ -85,7 +109,7 @@ export default function AiChat({ user }: { user: User }) {
     <>
       <div className=" h-4/5 overflow-y-auto">
         <div className=" flex flex-col min-w-full min-h-full  gap-4 p-3 overflow-y-auto">
-          {aiMessages &&
+          {aiMessages.length > 0 &&
             aiMessages.map((aiMessage, index) => {
               const multiple =
                 aiMessages[index - 1]?.role === aiMessages[index].role;

@@ -8,6 +8,9 @@ import UserInfo from "./UserInfo";
 import getMyId from "@/lib/getMyId";
 import getUser from "@/lib/getUser";
 import getChats from "@/lib/getChats";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import getAiChats from "@/lib/getAiChats";
+import AiChatList from "./AiChatList";
 
 export default async function Sidebar({ className }: { className: string }) {
   // const myId = await getMyId();
@@ -15,6 +18,7 @@ export default async function Sidebar({ className }: { className: string }) {
   const myId = await getMyId();
 
   const chats = await getChats(myId);
+  const aiChats = await getAiChats();
 
   // console.log(`logging me as user in sidebar component ${user}`);
 
@@ -28,8 +32,20 @@ export default async function Sidebar({ className }: { className: string }) {
           Messenger
         </h1>
       </div>
-      <NewChatButton />
-      <ChatList initialChats={chats} myId={myId} />
+      <NewChatButton myId={myId} />
+      <Tabs defaultValue="chats" className="w-full">
+        <TabsList className="flex w-36  m-auto">
+          <TabsTrigger value="chats">Chats</TabsTrigger>
+          <TabsTrigger value="aiChats">Ai Chats</TabsTrigger>
+        </TabsList>
+        <TabsContent value="chats">
+          {chats && <ChatList initialChats={chats} myId={myId} />}
+        </TabsContent>
+        <TabsContent value="aiChats">
+          {aiChats && <AiChatList initialChats={aiChats} myId={myId} />}
+        </TabsContent>
+      </Tabs>
+
       <Separator className=" my-4 w-full" />
       <div className="flex flex-col gap-2">
         <Link href={"/add-friend"}>

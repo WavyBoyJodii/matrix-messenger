@@ -73,7 +73,7 @@ export default function ChatList({
   return (
     <div className=" flex flex-col">
       <h4 className=" text-sm text-center">Chats</h4>
-      <ScrollArea className=" h-80 w-full ">
+      <ScrollArea className=" h-64 w-full ">
         <div className=" p-4">
           {chats &&
             chats.map((chat) => (

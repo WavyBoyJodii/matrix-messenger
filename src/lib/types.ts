@@ -108,6 +108,16 @@ export type Chat = {
 export type NewChatReturn = {
   chat: Chat;
 };
+
+export type AiChat = {
+  id: number;
+  user: number;
+  aiMessage: AiMessage[];
+};
+
+export type NewAiChatReturn = {
+  id: number;
+};
 export type PusherChats = {
   chat: string;
 };

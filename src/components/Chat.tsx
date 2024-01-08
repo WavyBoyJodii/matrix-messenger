@@ -45,7 +45,7 @@ export default function Chat({
       pusher.unsubscribe(`messages-${chat.id}`);
       pusher.unbind("new-message", addToMessages);
     };
-  }, []);
+  }, [chat]);
 
   return (
     <div className=" h-4/5 overflow-y-auto">
