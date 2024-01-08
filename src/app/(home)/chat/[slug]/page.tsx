@@ -1,3 +1,5 @@
+export const revalidate = 0;
+
 import ChatHeader from "@/components/ChatHeader";
 import Chat from "@/components/Chat";
 import getMyId from "@/lib/getMyId";

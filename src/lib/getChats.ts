@@ -1,5 +1,5 @@
 "use server";
-export const revalidate = 0;
+
 import { cookies } from "next/headers";
 import type { Chat, NoUserChats } from "@/lib/types";
 import axios from "axios";
