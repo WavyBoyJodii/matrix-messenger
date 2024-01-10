@@ -1,6 +1,5 @@
 "use client";
 
-import clearAuthCookie from "@/lib/clearAuthCookie";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -15,7 +14,6 @@ export default function SignOut({
   const Logout = () => {
     router.push("/");
     setTimeout(async () => {
-      "use server";
       await clearAuthCookie();
     }, 2000);
 
