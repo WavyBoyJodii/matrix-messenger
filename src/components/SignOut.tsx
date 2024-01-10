@@ -15,6 +15,7 @@ export default function SignOut({
   const Logout = () => {
     router.push("/");
     setTimeout(async () => {
+      "use server";
       await clearAuthCookie();
     }, 2000);
 
