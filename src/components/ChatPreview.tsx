@@ -40,7 +40,7 @@ export default function ChatPreview({
               : chat.user1.username.substring(0, 1)}
           </AvatarFallback>
         </Avatar>
-        <div className="flex flex-col gap-1 hidden w-24 sm:flex">
+        <div className="flex flex-col gap-1  w-24 ">
           <h3 className=" text-base font-semibold  truncate">
             {myId === chat.user_id1 ? chat.user2.username : chat.user1.username}
           </h3>

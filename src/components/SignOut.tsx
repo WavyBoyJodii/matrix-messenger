@@ -36,7 +36,7 @@ export default function SignOut() {
           clipRule="evenodd"
         ></path>
       </svg>{" "}
-      <p className=" hidden sm:block">Log Out</p>
+      <p>Log Out</p>
     </Button>
   );
 }

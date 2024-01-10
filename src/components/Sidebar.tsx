@@ -65,7 +65,7 @@ export default async function Sidebar({ className }: { className: string }) {
                 clipRule="evenodd"
               ></path>
             </svg>
-            <p className=" hidden sm:block">Add Friend</p>
+            <p>Add Friend</p>
           </Button>
         </Link>
         <Link href={"/friend-list"}>
@@ -84,7 +84,7 @@ export default async function Sidebar({ className }: { className: string }) {
                 clipRule="evenodd"
               ></path>
             </svg>{" "}
-            <p className=" hidden sm:block">Friends List</p>
+            <p>Friends List</p>
           </Button>
         </Link>
         <Link href={"/requests"}>
@@ -104,7 +104,7 @@ export default async function Sidebar({ className }: { className: string }) {
                 clipRule="evenodd"
               ></path>
             </svg>
-            <p className=" hidden sm:block">View Friend Requests</p>
+            <p>View Friend Requests</p>
           </Button>
         </Link>
         <SignOut />

@@ -30,7 +30,7 @@ export default function AiChatPreview({
             <AvatarImage src="/chatGptIcon.png" />
             <AvatarFallback>Ai</AvatarFallback>
           </Avatar>
-          <div className="flex gap-1 hidden w-32 sm:flex">
+          <div className="flex gap-1 w-32">
             <h3 className=" text-base font-semibold  truncate">
               {messages && aiChat.aiMessage[0].content}
             </h3>
