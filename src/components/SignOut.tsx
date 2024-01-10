@@ -3,20 +3,14 @@
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import clearAuthCookie from "@/lib/clearAuthCookie";
 
-export default function SignOut({
-  clearAuthCookie,
-}: {
-  clearAuthCookie: () => Promise<void>;
-}) {
+export default function SignOut() {
   const router = useRouter();
   const { toast } = useToast();
-  const Logout = () => {
+  const Logout = async () => {
+    await clearAuthCookie();
     router.push("/");
-    setTimeout(async () => {
-      await clearAuthCookie();
-    }, 2000);
-
     toast({
       description: `You have succesfully logged out`,
     });

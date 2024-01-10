@@ -7,5 +7,7 @@ interface setCookieProps {
 }
 
 export default async function setCookie({ jwt }: setCookieProps) {
+  console.log("logging setCookie is running...");
   cookies().set("auth", jwt);
+  console.log("setCookie is complete...");
 }
