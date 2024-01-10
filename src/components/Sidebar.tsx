@@ -11,9 +11,14 @@ import getChats from "@/lib/getChats";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import getAiChats from "@/lib/getAiChats";
 import AiChatList from "./AiChatList";
-import clearAuthCookie from "@/lib/clearAuthCookie";
 
-export default async function Sidebar({ className }: { className: string }) {
+export default async function Sidebar({
+  className,
+  clearAuthCookie,
+}: {
+  className: string;
+  clearAuthCookie: () => Promise<void>;
+}) {
   // const myId = await getMyId();
   // const user = await getUser(myId);
   const myId = await getMyId();
