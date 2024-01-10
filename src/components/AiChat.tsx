@@ -39,11 +39,11 @@ export default function AiChat({
   const sendMessage = async () => {
     if (!input) return;
     setIsLoading(true);
-    console.log(`logging chatId in Ai Chat component ${chatId}`);
+    // console.log(`logging chatId in Ai Chat component ${chatId}`);
 
     try {
       const token = await getAuthToken();
-      console.log(`logging ai messages length ${aiMessages.length}`);
+      // console.log(`logging ai messages length ${aiMessages.length}`);
 
       if (aiMessages.length < 1) {
         const result = await axios.post<AiMessage>(

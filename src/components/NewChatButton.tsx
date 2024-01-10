@@ -21,9 +21,9 @@ export default function NewChatButton({ myId }: { myId: number }) {
           },
         },
       );
-      console.log(
-        `logging result of New Ai Chat button ${JSON.stringify(result.data)}`,
-      );
+      // console.log(
+      //   `logging result of New Ai Chat button ${JSON.stringify(result.data)}`,
+      // );
       router.push(`/ai/${result.data.id}`);
     } catch (err) {
       console.log(err);

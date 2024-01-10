@@ -17,7 +17,6 @@ export default function AiChatList({
   myId: number;
 }) {
   const [aiChats, setAiChats] = useState(initialChats);
-  console.log(`logging myId in aichatlist ${myId}`);
 
   useEffect(() => {
     pusher.subscribe(`aichats-${myId}`);
@@ -25,7 +24,7 @@ export default function AiChatList({
     function addToChats(newchat: PusherChats) {
       // console.log(`logging newChat from pusher ${JSON.stringify(newchat)}`);
       const chatObj = JSON.parse(newchat.chat) as AiChat;
-      console.log(`logging chatObj ${JSON.stringify(chatObj)}`);
+      //   console.log(`logging chatObj ${JSON.stringify(chatObj)}`);
 
       setAiChats((prevChats) => [...prevChats, chatObj]);
     }

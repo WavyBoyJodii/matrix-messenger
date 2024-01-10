@@ -33,9 +33,9 @@ export default function Chat({
 
     function addToMessages(message: PusherMessage) {
       const messageObj = JSON.parse(message.message) as Message;
-      console.log(
-        `logging messageOBJ from pusher ${JSON.stringify(messageObj)}`,
-      );
+      // console.log(
+      //   `logging messageOBJ from pusher ${JSON.stringify(messageObj)}`,
+      // );
       setMessages((prev) => [messageObj, ...prev]);
     }
 

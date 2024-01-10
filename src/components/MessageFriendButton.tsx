@@ -26,11 +26,11 @@ export default function MessageFriendButton({ friend }: { friend: User }) {
           },
         },
       );
-      console.log(
-        `logging result of message friend button ${JSON.stringify(
-          result.data,
-        )}`,
-      );
+      // console.log(
+      //   `logging result of message friend button ${JSON.stringify(
+      //     result.data,
+      //   )}`,
+      // );
 
       router.push(`/chat/${result.data.chat.chatId}`);
     } catch (error) {

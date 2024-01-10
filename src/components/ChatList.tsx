@@ -45,7 +45,7 @@ export default function ChatList({
     function addToChats(newchat: PusherChats) {
       // console.log(`logging newChat from pusher ${JSON.stringify(newchat)}`);
       const chatObj = JSON.parse(newchat.chat) as Chat;
-      console.log(`logging chatObj ${JSON.stringify(chatObj)}`);
+      // console.log(`logging chatObj ${JSON.stringify(chatObj)}`);
 
       const chatIndex = chats.findIndex((chat) => chat.id === chatObj.id);
       if (chatIndex !== -1) {

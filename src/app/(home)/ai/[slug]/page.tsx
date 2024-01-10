@@ -16,7 +16,7 @@ export default async function AiChatPage({
   const myId = await getMyId();
   const user = await getUser(myId);
   const aiChatId = Number(params.slug);
-  console.log(`logging aichatid in ai chat page ${aiChatId}`);
+  // console.log(`logging aichatid in ai chat page ${aiChatId}`);
   const aiChat = await getAiChat(aiChatId);
 
   if (aiChat === null) {

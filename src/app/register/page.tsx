@@ -42,12 +42,11 @@ export default function RegisterPage() {
 
   const onSubmit = async (data: ZNewUserSchema) => {
     try {
-      console.log("beginning submission");
       const result = await axios.post(
         "https://messengerbackend-production-d50f.up.railway.app/sign-up",
         data,
       );
-      console.log(result.data);
+      // console.log(result.data);
       toast({
         description: `${result.data.message}`,
       });

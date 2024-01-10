@@ -45,7 +45,7 @@ export default function SearchFriend({ setFriend }: SearchFriendProps) {
           },
         },
       );
-      console.log(result);
+      // console.log(result);
       setFriend(result.data);
     } catch (error) {
       if (axios.isAxiosError<AxiosErrorMessage>(error)) {

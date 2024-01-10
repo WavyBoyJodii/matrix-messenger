@@ -46,14 +46,14 @@ export default function LoginPage() {
         "https://messengerbackend-production-d50f.up.railway.app/login",
         data,
       );
-      console.log(`logging result of login api call ${JSON.stringify(result)}`);
+      // console.log(`logging result of login api call ${JSON.stringify(result)}`);
       await setCookie({ jwt: result.data.token });
       await setUserId(result.data.userId);
       const chats = await getChats(result.data.userId);
       toast({
         description: `${result.data.username} has succesfully logged in`,
       });
-      console.log(chats);
+      // console.log(chats);
       setTimeout(() => {
         if (chats.length === 0) {
           router.push(`/chat/nochat`);

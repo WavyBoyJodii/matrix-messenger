@@ -18,7 +18,7 @@ export default async function ChatPage({
 
   const chatParticipants = params.slug.split("--");
   const chatId = params.slug;
-  console.log(`logging chat id in chat page ${chatId}`);
+  // console.log(`logging chat id in chat page ${chatId}`);
   const myId = await getMyId();
   const chat = await getChat(chatId);
 
