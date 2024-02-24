@@ -1,36 +1,15 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Matrix Messenger
 
-## Getting Started
+Matrix Messenger was an app that I made to practice creating products with real-time functionalities. On todays modern web, users are expecting blazing fast apps that are constantly updating with live data. A chat application is a great way to show off these capabilities.
 
-First, run the development server:
+The frontend for Matrix Messenger was built using Next Js, Typescript, Tailwind, Pusher Js, and Zod. Though simple in concept, this messenger app required a lot of components to be built. I took strong inspiration from Facebook Messenger and instagram DM's when designing this app.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The backend was built using Express, Drizzle Orm with a Postgresql database, PassportJs for Auth, and Pusher Js for websockets and real-time functionality. I really enjoyed using Drizzle which provided full type safety to all of my data. Moving forward I think Drizzle is my go-to ORM.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I wanted to make this app standout from a typical chat app so I added a feature which allows you to chat with ChatGpt. For me this was the coolest part of the app and ended up being the "killer app" of the application. I think AI is an important tool and when used tastefully can really enhance a users experience within an app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Feel free to sign up for Matrix Messenger and test it out with friends. 😎
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Screenshots
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![App Screenshot](https://jodii-dev.vercel.app/_next/image?url=%2Fprojects%2Fmatrix-messenger.vercel.app_.png&w=828&q=75)
